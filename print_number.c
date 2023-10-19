@@ -2,28 +2,28 @@
 
 /**
  * _isdigit - checks if character is digit
- * @c: the character to check
+ * @char: the character to check
  *
  * Return: 1 if digit, 0 otherwise
  */
-int _isdigit(int c)
+int _isdigit(int char)
 {
-	return (c >= '0' && c <= '9');
+	return (char >= '0' && char <= '9');
 }
 
 /**
  * _strlen - returns the length of a string
- * @s: the string whose length to check
+ * @string: the string whose length to check
  *
  * Return: integer length of string
  */
-int _strlen(char *s)
+int _strlen(char *string)
 {
-	int i = 0;
+	int num = 0;
 
-	while (*s++)
-		i++;
-	return (i);
+	while (*string++)
+		num++;
+	return (num);
 }
 
 /**
