@@ -57,30 +57,40 @@ int print_string(va_list ap, params_t *params)
 	char *text = va_arg(ap, char *), padding_char = ' ';
 	unsigned int padding = 0, count = 0, i = 0, j;
 
-	if (!text)
-		text = NULL_STRING;
+	(void)params;
 
-	padding = _strlen(text);
+	switch ((int)(!text))
+		case 1:
+			text = NULL_STRING;
 
-	if (params->precision < 0)
-		params->precision = padding;
-	else if (params->precision < padding)
-		padding = params->precision;
+	j = padding = _strlen(text);
+
+	if (params->precision < padding)
+		j = padding = params->precision;
 
 	if (params->minus_flag)
-		while (i < padding)
-			count += _putchar(*text++), i++;
+	{
+		if (params->precision != UINT_MAX)
+			for (i = 0; i < padding; i++)
+				count += _putchar(*text++);
+		else
+			count += _puts(text);
+	}
 
-	while (i < params->width - padding)
-		count += _putchar(padding_char), i++;
+	while (j++ < params->width)
+		count += _putchar(padding_char);
 
 	if (!params->minus_flag)
-		while (i < padding)
-			count += _putchar(*text++), i++;
+	{
+		if (params->precision != UINT_MAX)
+			for (i = 0; i < padding; i++)
+				count += _putchar(*text++);
+		else
+			count += _puts(text);
+	}
 
 	return (count);
 }
-
 
 /**
  * print_percent - prints string
