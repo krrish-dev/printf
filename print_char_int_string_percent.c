@@ -47,7 +47,7 @@ int print_int(va_list ap, params_t *params)
 
 /**
  * print_string - prints string
- * @ap: argument pointer
+ * @args: argument pointer
  * @params: the parameters struct
  *
  * Return: number chars printed
@@ -93,7 +93,7 @@ int print_string(va_list args, params_t *params)
 			count += _puts(text);
 	}
 
-	return count;
+	return (count);
 }
 
 /**
