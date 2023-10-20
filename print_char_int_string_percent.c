@@ -21,7 +21,7 @@ int print_char(va_list ap, params_t *params)
 	if (!params->minus_flag)
 		count += _putchar(character);
 
-	return count;
+	return (count);
 }
 
 /**
@@ -42,7 +42,7 @@ int print_int(va_list ap, params_t *params)
 	else
 		integer = (int)va_arg(ap, int);
 
-	return print_number(convert(integer, 10, 0, params), params);
+	return (print_number(convert(integer, 10, 0, params), params));
 }
 
 /**
@@ -89,7 +89,7 @@ int print_string(va_list ap, params_t *params)
 			count += _puts(text);
 	}
 
-	return count;
+	return (count);
 }
 
 /**
@@ -141,5 +141,5 @@ int print_S(va_list ap, params_t *params)
 		}
 	}
 
-	return count;
+	return (count);
 }
