@@ -9,27 +9,27 @@
  */
 int print_hex(va_list ap, params_t *params)
 {
-    unsigned long num;
-    int count = 0;
-    char *str;
+	unsigned long number;
+	int count = 0;
+	char *string;
 
-    if (params->l_modifier)
-        num = (unsigned long)va_arg(ap, unsigned long);
-    else if (params->h_modifier)
-        num = (unsigned short int)va_arg(ap, unsigned int);
-    else
-        num = (unsigned int)va_arg(ap, unsigned int);
+	if (params->l_modifier)
+		number = (unsigned long)va_arg(ap, unsigned long);
+	else if (params->h_modifier)
+		number = (unsigned short int)va_arg(ap, unsigned int);
+	else
+		number = (unsigned int)va_arg(ap, unsigned int);
 
-    str = convert(num, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
-    
-    if (params->hashtag_flag && num)
-    {
-        *--str = 'x';
-        *--str = '0';
-    }
-    params->unsign = 1;
+	string = convert(number, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
 
-    return (count += print_number(str, params));
+	if (params->hashtag_flag && number)
+	{
+		*--string = 'x';
+		*--string = '0';
+	}
+
+	params->unsign = 1;
+	return (count += print_number(string, params));
 }
 
 /**
@@ -41,27 +41,27 @@ int print_hex(va_list ap, params_t *params)
  */
 int print_HEX(va_list ap, params_t *params)
 {
-    unsigned long num;
-    int count = 0;
-    char *str;
+	unsigned long number;
+	int count = 0;
+	char *string;
 
-    if (params->l_modifier)
-        num = (unsigned long)va_arg(ap, unsigned long);
-    else if (params->h_modifier)
-        num = (unsigned short int)va_arg(ap, unsigned int);
-    else
-        num = (unsigned int)va_arg(ap, unsigned int);
+	if (params->l_modifier)
+		number = (unsigned long)va_arg(ap, unsigned long);
+	else if (params->h_modifier)
+		number = (unsigned short int)va_arg(ap, unsigned int);
+	else
+		number = (unsigned int)va_arg(ap, unsigned int);
 
-    str = convert(num, 16, CONVERT_UNSIGNED, params);
+	string = convert(number, 16, CONVERT_UNSIGNED, params);
 
-    if (params->hashtag_flag && num)
-    {
-        *--str = 'X';
-        *--str = '0';
-    }
-    params->unsign = 1;
+	if (params->hashtag_flag && number)
+	{
+		*--string = 'X';
+		*--string = '0';
+	}
 
-    return (count += print_number(str, params));
+	params->unsign = 1;
+	return (count += print_number(string, params));
 }
 
 /**
@@ -73,15 +73,15 @@ int print_HEX(va_list ap, params_t *params)
  */
 int print_binary(va_list ap, params_t *params)
 {
-    unsigned int num = va_arg(ap, unsigned int);
-    char *str = convert(num, 2, CONVERT_UNSIGNED, params);
-    int count = 0;
+	unsigned int number = va_arg(ap, unsigned int);
+	char *string = convert(number, 2, CONVERT_UNSIGNED, params);
+	int count = 0;
 
-    if (params->hashtag_flag && num)
-        *--str = '0';
-    params->unsign = 1;
+	if (params->hashtag_flag && number)
+		*--string = '0';
 
-    return (count += print_number(str, params));
+	params->unsign = 1;
+	return (count += print_number(string, params));
 }
 
 /**
@@ -93,22 +93,22 @@ int print_binary(va_list ap, params_t *params)
  */
 int print_octal(va_list ap, params_t *params)
 {
-    unsigned long num;
-    char *str;
-    int count = 0;
+	unsigned long number;
+	char *string;
+	int count = 0;
 
-    if (params->l_modifier)
-        num = (unsigned long)va_arg(ap, unsigned long);
-    else if (params->h_modifier)
-        num = (unsigned short int)va_arg(ap, unsigned int);
-    else
-        num = (unsigned int)va_arg(ap, unsigned int);
+	if (params->l_modifier)
+		number = (unsigned long)va_arg(ap, unsigned long);
+	else if (params->h_modifier)
+		number = (unsigned short int)va_arg(ap, unsigned int);
+	else
+		number = (unsigned int)va_arg(ap, unsigned int);
 
-    str = convert(num, 8, CONVERT_UNSIGNED, params);
+	string = convert(number, 8, CONVERT_UNSIGNED, params);
 
-    if (params->hashtag_flag && num)
-        *--str = '0';
-    params->unsign = 1;
+	if (params->hashtag_flag && number)
+		*--string = '0';
 
-    return (count += print_number(str, params));
+	params->unsign = 1;
+	return (count += print_number(string, params));
 }
