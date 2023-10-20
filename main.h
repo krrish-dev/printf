@@ -100,8 +100,8 @@ int print_rev(va_list ap, params_t *params);
 int print_rot13(va_list ap, params_t *params);
 
 /* print_number.c module */
-int _isdigit(int char);
-int _strlen(char *s);
+int _isdigit(int chars);
+int _strlen(char *str);
 int print_number(char *str, params_t *params);
 int print_number_right_shift(char *str, params_t *params);
 int print_number_left_shift(char *str, params_t *params);

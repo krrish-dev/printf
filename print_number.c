@@ -2,13 +2,13 @@
 
 /**
  * _isdigit - checks if character is digit
- * @char: the character to check
+ * @c: the character to check
  *
  * Return: 1 if digit, 0 otherwise
  */
-int _isdigit(int char)
+int _isdigit(int chars)
 {
-	return (char >= '0' && char <= '9');
+	return (chars >= '0' && chars <= '9');
 }
 
 /**
