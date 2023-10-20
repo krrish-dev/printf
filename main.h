@@ -72,7 +72,7 @@ int _putchar(int c);
 /* print_char_int_string_percent.c module */
 int print_char(va_list ap, params_t *params);
 int print_int(va_list ap, params_t *params);
-int print_string(va_list args, params_t *params);
+int print_string(va_list ap, params_t *params);
 int print_percent(va_list ap, params_t *params);
 int print_S(va_list ap, params_t *params);
 
