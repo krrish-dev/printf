@@ -19,6 +19,7 @@ char *get_precision(char *p, params_t *params, va_list ap)
 	if (*p == '*')
 	{
 		int prec = va_arg(ap, int);
+
 		if (prec >= 0)
 
 			precision = (unsigned int)prec;
