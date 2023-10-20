@@ -2,7 +2,7 @@
 made by<br>
 kerols<br>
 Segun
-Print F 
+Print F
 get_width
 get_precision
 get_modifier

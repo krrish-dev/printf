@@ -13,7 +13,7 @@ int _isdigit(int chars)
 
 /**
  * _strlen - returns the length of a string
- * @s: the string whose length to check
+ * @str: the string whose length to check
  *
  * Return: integer length of string
  */
