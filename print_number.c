@@ -74,7 +74,8 @@ int print_number_right_shift(char *number_str, params_t *params)
 	if (params->zero_flag && !params->minus_flag)
 		padding_char = '0';
 	is_negative = is_negative2 = (!params->unsign && *number_str == '-');
-	if (is_negative && length < params->width && padding_char == '0' && !params->minus_flag)
+	if (is_negative && length < params->width &&
+		padding_char == '0' && !params->minus_flag)
 		number_str++;
 	else
 		is_negative = 0;
@@ -83,23 +84,27 @@ int print_number_right_shift(char *number_str, params_t *params)
 		length++;
 	if (is_negative && padding_char == '0')
 		char_count += _putchar('-');
-	if (params->plus_flag && !is_negative2 && padding_char == '0' && !params->unsign)
+	if (params->plus_flag && !is_negative2 &&
+		padding_char == '0' && !params->unsign)
 		char_count += _putchar('+');
-	else if (!params->plus_flag && params->space_flag && !is_negative2 &&
+	else if (!params->plus_flag &&
+		params->space_flag && !is_negative2 &&
 		!params->unsign && params->zero_flag)
 		char_count += _putchar(' ');
 	while (length++ < params->width)
 		char_count += _putchar(padding_char);
 	if (is_negative && padding_char == ' ')
 		char_count += _putchar('-');
-	if (params->plus_flag && !is_negative2 && padding_char == ' ' && !params->unsign)
+	if (params->plus_flag && !is_negative2 &&
+	padding_char == ' ' && !params->unsign)
 		char_count += _putchar('+');
-	else if (!params->plus_flag && params->space_flag && !is_negative2 &&
+	else if (!params->plus_flag && params->space_flag &&
+	!is_negative2 &&
 		!params->unsign && !params->zero_flag)
 		char_count += _putchar(' ');
 	char_count += _puts(number_str);
 
-	return char_count;
+	return (char_count);
 }
 
 /**
@@ -133,5 +138,5 @@ int print_number_left_shift(char *number_str, params_t *params)
 	while (length++ < params->width)
 		char_count += _putchar(padding_char);
 
-	return char_count;
+	return (char_count);
 }
