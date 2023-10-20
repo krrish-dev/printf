@@ -55,7 +55,6 @@ int print_int(va_list ap, params_t *params)
 int print_string(va_list ap, params_t *params)
 {
 	char *text = va_arg(ap, char *), padding_char = ' ';
-
 	unsigned int padding = 0, count = 0, i = 0, j;
 
 	if (!text)
@@ -64,44 +63,24 @@ int print_string(va_list ap, params_t *params)
 	padding = _strlen(text);
 
 	if (params->precision < 0)
-	{
-
 		params->precision = padding;
-
-	}
 	else if (params->precision < padding)
-	{
-
 		padding = params->precision;
 
-	}
-
 	if (params->minus_flag)
-	{
 		while (i < padding)
-		{
-			count += _putchar(*text++);
-			i++;
-		}
-	}
+			count += _putchar(*text++), i++;
 
 	while (i < params->width - padding)
-	{
-		count += _putchar(padding_char);
-		i++;
-	}
+		count += _putchar(padding_char), i++;
 
 	if (!params->minus_flag)
-	{
 		while (i < padding)
-		{
-			count += _putchar(*text++);
-			i++;
-		}
-	}
+			count += _putchar(*text++), i++;
 
 	return (count);
 }
+
 
 /**
  * print_percent - prints string
