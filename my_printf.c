@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 			format_iterator++;
 		if (!get_specifier(format_iterator))
 			bytes_printed += print_from_to(specifier_start, format_iterator,
-				format_params.l_modifier || format_params.h_modifier ? format_iterator - 1 : 0);
+				format_params.has_l_modifier || format_params.has_h_modifier ? format_iterator - 1 : 0);
 		else
 			bytes_printed += get_print_func(format_iterator, args, &format_params);
 	}

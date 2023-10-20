@@ -32,8 +32,8 @@
  * @width: field width specified
  * @precision: field precision specified
  *
- * @h_modifier: on if h_modifier is specified
- * @l_modifier: on if l_modifier is specified
+ * @has_h_modifier: on if has_h_modifier is specified
+ * @has_l_modifier: on if has_l_modifier is specified
  *
  */
 typedef struct parameters
@@ -49,8 +49,8 @@ typedef struct parameters
 	unsigned int width;
 	unsigned int precision;
 
-	unsigned int h_modifier		: 1;
-	unsigned int l_modifier		: 1;
+	unsigned int has_h_modifier		: 1;
+	unsigned int has_l_modifier		: 1;
 } params_t;
 
 /**
