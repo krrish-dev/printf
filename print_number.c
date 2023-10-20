@@ -36,7 +36,7 @@ int _strlen(char *s)
 int print_number(char *str, params_t *params)
 {
 	unsigned int i = _strlen(str);
-	int neg = (!params->is_unsign && *str == '-');
+	int neg = (!params->unsign && *str == '-');
 
 	if (!params->precision && *str == '0' && !str[1])
 		str = "";
@@ -71,7 +71,7 @@ int print_number_right_shift(char *str, params_t *params)
 
 	if (params->zero_flag && !params->minus_flag)
 		pad_char = '0';
-	neg = neg2 = (!params->is_unsign && *str == '-');
+	neg = neg2 = (!params->unsign && *str == '-');
 	if (neg && i < params->width && pad_char == '0' && !params->minus_flag)
 		str++;
 	else
@@ -81,19 +81,19 @@ int print_number_right_shift(char *str, params_t *params)
 		i++;
 	if (neg && pad_char == '0')
 		n += _putchar('-');
-	if (params->plus_flag && !neg2 && pad_char == '0' && !params->is_unsign)
+	if (params->plus_flag && !neg2 && pad_char == '0' && !params->unsign)
 		n += _putchar('+');
 	else if (!params->plus_flag && params->space_flag && !neg2 &&
-		!params->is_unsign && params->zero_flag)
+		!params->unsign && params->zero_flag)
 		n += _putchar(' ');
 	while (i++ < params->width)
 		n += _putchar(pad_char);
 	if (neg && pad_char == ' ')
 		n += _putchar('-');
-	if (params->plus_flag && !neg2 && pad_char == ' ' && !params->is_unsign)
+	if (params->plus_flag && !neg2 && pad_char == ' ' && !params->unsign)
 		n += _putchar('+');
 	else if (!params->plus_flag && params->space_flag && !neg2 &&
-		!params->is_unsign && !params->zero_flag)
+		!params->unsign && !params->zero_flag)
 		n += _putchar(' ');
 	n += _puts(str);
 	return (n);
@@ -113,15 +113,15 @@ int print_number_left_shift(char *str, params_t *params)
 
 	if (params->zero_flag && !params->minus_flag)
 		pad_char = '0';
-	neg = neg2 = (!params->is_unsign && *str == '-');
+	neg = neg2 = (!params->unsign && *str == '-');
 	if (neg && i < params->width && pad_char == '0' && !params->minus_flag)
 		str++;
 	else
 		neg = 0;
 
-	if (params->plus_flag && !neg2 && !params->is_unsign)
+	if (params->plus_flag && !neg2 && !params->unsign)
 		n += _putchar('+'), i++;
-	else if (params->space_flag && !neg2 && !params->is_unsign)
+	else if (params->space_flag && !neg2 && !params->unsign)
 		n += _putchar(' '), i++;
 	n += _puts(str);
 	while (i++ < params->width)
