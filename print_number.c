@@ -1,143 +1,130 @@
 #include "main.h"
 
 /**
- * is_digit - checks if character is a digit
+ * _isdigit - checks if character is digit
  * @c: the character to check
  *
- * Return: 1 if it's a digit, 0 otherwise
+ * Return: 1 if digit, 0 otherwise
  */
-int is_digit(int c)
+int _isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
 /**
- * string_length - returns the length of a string
- * @s: the string whose length to determine
+ * _strlen - returns the length of a string
+ * @s: the string whose length to check
  *
- * Return: the length of the string
+ * Return: integer length of string
  */
-int string_length(char *s)
+int _strlen(char *s)
 {
 	int i = 0;
 
 	while (*s++)
 		i++;
-
 	return (i);
 }
 
 /**
- * print_formatted_number - prints a number with specified options
- * @number_str: the number as a string
+ * print_number - prints a number with options
+ * @str: the base number as a string
  * @params: the parameter struct
  *
- * Return: number of characters printed
+ * Return: chars printed
  */
-int print_formatted_number(char *number_str, params_t *params)
+int print_number(char *str, params_t *params)
 {
-	unsigned int length = string_length(number_str);
-	int is_negative = (!params->unsign && *number_str == '-');
+	unsigned int i = _strlen(str);
+	int neg = (!params->unsign && *str == '-');
 
-	if (!params->precision && *number_str == '0' && !number_str[1])
-		number_str = "";
-	if (is_negative)
+	if (!params->precision && *str == '0' && !str[1])
+		str = "";
+	if (neg)
 	{
-		number_str++;
-		length--;
+		str++;
+		i--;
 	}
 	if (params->precision != UINT_MAX)
-		while (length++ < params->precision)
-			*--number_str = '0';
-	if (is_negative)
-		*--number_str = '-';
+		while (i++ < params->precision)
+			*--str = '0';
+	if (neg)
+		*--str = '-';
 
 	if (!params->minus_flag)
-		return (print_number_right_shift(number_str, params));
+		return (print_number_right_shift(str, params));
 	else
-		return (print_number_left_shift(number_str, params));
+		return (print_number_left_shift(str, params));
 }
 
 /**
- * print_number_right_shift - prints a number with specified options
- * @number_str: the number as a string
+ * print_number_right_shift - prints a number with options
+ * @str: the base number as a string
  * @params: the parameter struct
  *
- * Return: number of characters printed
+ * Return: chars printed
  */
-int print_number_right_shift(char *number_str, params_t *params)
+int print_number_right_shift(char *str, params_t *params)
 {
-	unsigned int char_count = 0, is_negative, is_negative2;
-	unsigned int length = string_length(number_str);
-	char padding_char = ' ';
+	unsigned int n = 0, neg, neg2, i = _strlen(str);
+	char pad_char = ' ';
 
 	if (params->zero_flag && !params->minus_flag)
-		padding_char = '0';
-	is_negative = is_negative2 = (!params->unsign && *number_str == '-');
-	if (is_negative && length < params->width &&
-		padding_char == '0' && !params->minus_flag)
-		number_str++;
+		pad_char = '0';
+	neg = neg2 = (!params->unsign && *str == '-');
+	if (neg && i < params->width && pad_char == '0' && !params->minus_flag)
+		str++;
 	else
-		is_negative = 0;
-	if ((params->plus_flag && !is_negative2) ||
-		(!params->plus_flag && params->space_flag && !is_negative2))
-		length++;
-	if (is_negative && padding_char == '0')
-		char_count += _putchar('-');
-	if (params->plus_flag && !is_negative2 &&
-		padding_char == '0' && !params->unsign)
-		char_count += _putchar('+');
-	else if (!params->plus_flag &&
-		params->space_flag && !is_negative2 &&
+		neg = 0;
+	if ((params->plus_flag && !neg2) ||
+		(!params->plus_flag && params->space_flag && !neg2))
+		i++;
+	if (neg && pad_char == '0')
+		n += _putchar('-');
+	if (params->plus_flag && !neg2 && pad_char == '0' && !params->unsign)
+		n += _putchar('+');
+	else if (!params->plus_flag && params->space_flag && !neg2 &&
 		!params->unsign && params->zero_flag)
-		char_count += _putchar(' ');
-	while (length++ < params->width)
-		char_count += _putchar(padding_char);
-	if (is_negative && padding_char == ' ')
-		char_count += _putchar('-');
-	if (params->plus_flag && !is_negative2 &&
-	padding_char == ' ' && !params->unsign)
-		char_count += _putchar('+');
-	else if (!params->plus_flag && params->space_flag &&
-	!is_negative2 &&
+		n += _putchar(' ');
+	while (i++ < params->width)
+		n += _putchar(pad_char);
+	if (neg && pad_char == ' ')
+		n += _putchar('-');
+	if (params->plus_flag && !neg2 && pad_char == ' ' && !params->unsign)
+		n += _putchar('+');
+	else if (!params->plus_flag && params->space_flag && !neg2 &&
 		!params->unsign && !params->zero_flag)
-		char_count += _putchar(' ');
-	char_count += _puts(number_str);
-
-	return (char_count);
+		n += _putchar(' ');
+	n += _puts(str);
+	return (n);
 }
 
 /**
- * print_number_left_shift - prints a number with specified options
- * @number_str: the number as a string
+ * print_number_left_shift - prints a number with options
+ * @str: the base number as a string
  * @params: the parameter struct
  *
- * Return: number of characters printed
+ * Return: chars printed
  */
-int print_number_left_shift(char *number_str, params_t *params)
+int print_number_left_shift(char *str, params_t *params)
 {
-	unsigned int char_count = 0, is_negative, is_negative2;
-	unsigned int length = string_length(number_str);
-	char padding_char = ' ';
+	unsigned int n = 0, neg, neg2, i = _strlen(str);
+	char pad_char = ' ';
 
 	if (params->zero_flag && !params->minus_flag)
-		padding_char = '0';
-	is_negative = is_negative2 = (!params->unsign && *number_str == '-');
-	if (is_negative && length < params->width &&
-		padding_char == '0' && !params->minus_flag)
-		number_str++;
+		pad_char = '0';
+	neg = neg2 = (!params->unsign && *str == '-');
+	if (neg && i < params->width && pad_char == '0' && !params->minus_flag)
+		str++;
 	else
-		is_negative = 0;
+		neg = 0;
 
-	if (params->plus_flag && !is_negative2 && !params->unsign)
-		char_count += _putchar('+'), length++;
-	else if (params->space_flag && !is_negative2 && !params->unsign)
-		char_count += _putchar(' '), length++;
-
-	char_count += _puts(number_str);
-
-	while (length++ < params->width)
-		char_count += _putchar(padding_char);
-
-	return (char_count);
+	if (params->plus_flag && !neg2 && !params->unsign)
+		n += _putchar('+'), i++;
+	else if (params->space_flag && !neg2 && !params->unsign)
+		n += _putchar(' '), i++;
+	n += _puts(str);
+	while (i++ < params->width)
+		n += _putchar(pad_char);
+	return (n);
 }
