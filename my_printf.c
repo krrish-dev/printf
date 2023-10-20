@@ -6,6 +6,8 @@
  *
  * Return: The number of bytes printed
  */
+#include "main.h"
+
 int _printf(const char *format, ...)
 {
 	int bytes_printed = 0;
@@ -16,19 +18,15 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 
 	for (format_position = (char *)format; *format_position; format_position++)
 	{
-		
 		init_params(&format_params, args);
 
-		
 		if (*format_position != '%')
 		{
 			bytes_printed += _putchar(*format_position);
@@ -38,21 +36,16 @@ int _printf(const char *format, ...)
 		specifier_start = format_position;
 		format_position++;
 
-		
 		while (get_flag(format_position, &format_params))
 		{
 			format_position++;
 		}
 
-		
 		format_position = get_width(format_position, &format_params, args);
-
 		format_position = get_precision(format_position, &format_params, args);
-
 
 		if (get_modifier(format_position, &format_params))
 			format_position++;
-
 
 		if (!get_specifier(format_position))
 		{
@@ -64,7 +57,6 @@ int _printf(const char *format, ...)
 			bytes_printed += get_print_func(format_position, args, &format_params);
 		}
 	}
-
 
 	_putchar(BUF_FLUSH);
 	va_end(args);
