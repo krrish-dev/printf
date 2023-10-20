@@ -17,11 +17,11 @@ int _isdigit(int chars)
  *
  * Return: integer length of string
  */
-int _strlen(char *s)
+int _strlen(char *str)
 {
 	int i = 0;
 
-	while (*s++)
+	while (*str++)
 		i++;
 	return (i);
 }
