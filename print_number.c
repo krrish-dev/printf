@@ -123,7 +123,8 @@ int print_number_left_shift(char *number_str, params_t *params)
 	if (params->zero_flag && !params->minus_flag)
 		padding_char = '0';
 	is_negative = is_negative2 = (!params->unsign && *number_str == '-');
-	if (is_negative && length < params->width && padding_char == '0' && !params->minus_flag)
+	if (is_negative && length < params->width &&
+		padding_char == '0' && !params->minus_flag)
 		number_str++;
 	else
 		is_negative = 0;
