@@ -5,3 +5,4 @@ Segun
 Print F 
 get_width
 get_precision
+get_modifier
