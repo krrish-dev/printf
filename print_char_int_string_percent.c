@@ -58,12 +58,13 @@ int print_string(va_list ap, params_t *params)
 	unsigned int padding = 0, count = 0, i = 0;
 
 	(void)params;
+
 	if (!text)
 		text = NULL_STRING;
 
 	padding = _strlen(text);
 
-	if (params->precision < padding)
+	if (params->precision >= 0 && params->precision < padding)
 		padding = params->precision;
 
 	if (params->minus_flag)
