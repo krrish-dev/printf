@@ -31,7 +31,7 @@ char *get_precision(char *p, params_t *params, va_list ap)
 		else
 		{
 
-			precision = UINT_MAX;
+			precision = 0;
 
 		}
 
