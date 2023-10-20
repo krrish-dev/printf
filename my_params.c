@@ -9,7 +9,7 @@
  */
 void init_params(params_t *params, va_list ap)
 {
-	params->unsign = 0;
+	params->is_unsign = 0;
 
 	params->plus_flag = 0;
 	params->space_flag = 0;
