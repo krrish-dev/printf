@@ -78,6 +78,9 @@ int print_string(va_list ap, params_t *params)
 	unsigned int count = 0;
 	unsigned int len = str ? _strlen(str) : 6;
 
+	if (!str)
+		str = NULL_STRING;
+
 	len = pad_string(str, params);
 
 	if (params->minus_flag)
