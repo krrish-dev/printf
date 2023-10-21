@@ -72,40 +72,25 @@ int pad_string(char *str, params_t *params)
  *
  * Return: number chars printed
  */
-int print_string(va_list ap, params_t *params, char specifier)
+int print_string(va_list ap, params_t *params)
 {
 	char *str = va_arg(ap, char *);
 	unsigned int count = 0;
-	unsigned int len = 0;
+	unsigned int len = str ? _strlen(str) : 6;
 
-	if (!str)
-		str = NULL_STRING;
+	len = pad_string(str, params);
 
-	if (specifier == 's' || specifier == 'c')
+	if (params->minus_flag)
 	{
-		len = _strlen(str);
-		if (params.precision >= 0 && params.precision < len)
-			len = params.precision;
+		if (params->precision != INT_MAX)
+			count += _puts(str);
 	}
-	else if (specifier == '%')
+	else
 	{
-		str = "%";
-		len = 1;
-	}
-
-	if (params.minus_flag)
-	{
-		for (unsigned int i = 0; i < len; i++)
-			count += _putchar(str[i]);
-	}
-
-	while (len++ < params.width)
-		count += _putchar(' ');
-
-	if (!params.minus_flag)
-	{
-		for (unsigned int i = 0; i < len; i++)
-			count += _putchar(str[i]);
+		while (len++ < params->width)
+			count += _putchar(' ');
+		if (params->precision != INT_MAX)
+			count += _puts(str);
 	}
 
 	return (count);
