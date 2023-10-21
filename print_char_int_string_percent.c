@@ -54,18 +54,12 @@ int print_int(va_list ap, params_t *params)
  */
 int pad_string(char *str, params_t *params)
 {
+	unsigned int len = _strlen(str);
+	int precision = params->precision;
 
-unsigned int len = _strlen(str);
-
-	if (params->precision < len)
-	{
-		str[params->precision] = '\0';
-		len = params->precision;
-	}
-
-	while (len < params->precision)
-	{
-		str[len++] = ' ';
+	if (precision >= 0 && precision < len) {
+		str[precision] = '\0';
+		len = precision;
 	}
 
 	return (len);
@@ -80,34 +74,19 @@ unsigned int len = _strlen(str);
  */
 int print_string(va_list ap, params_t *params)
 {
-
 	char *str = va_arg(ap, char *);
-	unsigned int count = 0, i;
-	unsigned int len;
-
-	if (!str)
-		str = NULL_STRING;
+	unsigned int count = 0;
+	unsigned int len = str ? _strlen(str) : 6; // Set default length for NULL_STRING
 
 	len = pad_string(str, params);
 
-	if (params->minus_flag)
-	{
-		if (params->precision != UINT_MAX)
-			for (i = 0; i < len; i++)
-				count += _putchar(str[i]);
-		else
+	if (params->minus_flag) {
+		if (params->precision != INT_MAX)
 			count += _puts(str);
-	}
-
-	while (len++ < params->width)
-		count += _putchar(' ');
-
-	if (!params->minus_flag)
-	{
-		if (params->precision != UINT_MAX)
-			for (i = 0; i < len; i++)
-				count += _putchar(str[i]);
-		else
+	} else {
+		while (len++ < params->width)
+			count += _putchar(' ');
+		if (params->precision != INT_MAX)
 			count += _puts(str);
 	}
 
