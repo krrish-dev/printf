@@ -68,7 +68,7 @@ int pad_string(char *str, params_t *params)
 		str[len++] = ' ';
 	}
 
-	return len;
+	return (len);
 }
 
 /**
