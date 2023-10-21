@@ -57,13 +57,13 @@ int pad_string(char *str, params_t *params)
 	unsigned int len = _strlen(str);
 	int precision = params->precision;
 
-	if (precision >= 0 && precision < len)
+	if (params->precision >= 0 && (unsigned int)params->precision < len)
 	{
-		str[precision] = '\0';
-		len = precision;
+		str[params->precision] = '\0';
+		len = (unsigned int)params->precision;
 	}
 
-	return (len);
+	return (int)len;
 }
 
 /**
