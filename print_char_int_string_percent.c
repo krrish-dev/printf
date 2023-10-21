@@ -57,7 +57,8 @@ int pad_string(char *str, params_t *params)
 	unsigned int len = _strlen(str);
 	int precision = params->precision;
 
-	if (precision >= 0 && precision < len) {
+	if (precision >= 0 && precision < len)
+	{
 		str[precision] = '\0';
 		len = precision;
 	}
@@ -76,14 +77,17 @@ int print_string(va_list ap, params_t *params)
 {
 	char *str = va_arg(ap, char *);
 	unsigned int count = 0;
-	unsigned int len = str ? _strlen(str) : 6; // Set default length for NULL_STRING
+	unsigned int len = str ? _strlen(str) : 6;
 
 	len = pad_string(str, params);
 
-	if (params->minus_flag) {
+	if (params->minus_flag)
+	{
 		if (params->precision != INT_MAX)
 			count += _puts(str);
-	} else {
+	}
+	else
+	{
 		while (len++ < params->width)
 			count += _putchar(' ');
 		if (params->precision != INT_MAX)
