@@ -85,7 +85,7 @@ int print_string(va_list ap, params_t *params)
 	unsigned int count = 0, i;
 
 	if (!str)
-		str = "(null)";
+		str = NULL_STRING;
 
 	int len = pad_string(str, params);
 
