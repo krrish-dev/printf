@@ -76,21 +76,36 @@ int print_string(va_list ap, params_t *params)
 {
 	char *str = va_arg(ap, char *);
 	unsigned int count = 0;
-	unsigned int len = str ? _strlen(str) : 6;
+	unsigned int len = 0;
 
-	len = pad_string(str, params);
+	if (!str)
+		str = NULL_STRING;
+
+	if (params->specifier == 's' || params->specifier == 'c')
+	{
+		len = _strlen(str);
+		if (params->precision >= 0 && params->precision < len)
+			len = params->precision;
+	}
+	else if (params->specifier == '%')
+	{
+		str = "%";
+		len = 1;
+	}
 
 	if (params->minus_flag)
 	{
-		if (params->precision != INT_MAX)
-			count += _puts(str);
+		for (unsigned int i = 0; i < len; i++)
+			count += _putchar(str[i]);
 	}
-	else
+
+	while (len++ < params->width)
+		count += _putchar(' ');
+
+	if (!params->minus_flag)
 	{
-		while (len++ < params->width)
-			count += _putchar(' ');
-		if (params->precision != INT_MAX)
-			count += _puts(str);
+		for (unsigned int i = 0; i < len; i++)
+			count += _putchar(str[i]);
 	}
 
 	return (count);
