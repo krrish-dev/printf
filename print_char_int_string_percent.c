@@ -88,7 +88,7 @@ int print_string(va_list ap, params_t *params)
 	if (!str)
 		str = NULL_STRING;
 
-	int len = pad_string(str, params);
+	len = pad_string(str, params);
 
 	if (params->minus_flag)
 	{
