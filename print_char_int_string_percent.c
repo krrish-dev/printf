@@ -55,7 +55,7 @@ int print_int(va_list ap, params_t *params)
 int pad_string(char *str, params_t *params)
 {
 
-	int len = _strlen(str);
+unsigned int len = _strlen(str);
 
 	if (params->precision < len)
 	{
@@ -83,11 +83,11 @@ int print_string(va_list ap, params_t *params)
 
 	char *str = va_arg(ap, char *);
 	unsigned int count = 0, i;
-
+	unsigned int len;
 	if (!str)
 		str = NULL_STRING;
 
-	int len = pad_string(str, params);
+unsigned int len = pad_string(str, params);
 
 	if (params->minus_flag)
 	{
