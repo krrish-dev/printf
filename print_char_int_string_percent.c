@@ -67,7 +67,7 @@ int print_string(va_list ap, params_t *params)
 
 	if (params->precision < padding)
 		j = padding = params->precision;
-	
+
 	if (params->minus_flag)
 	{
 		if (params->precision != UINT_MAX)
@@ -104,42 +104,4 @@ int print_percent(va_list ap, params_t *params)
 	(void)ap;
 	(void)params;
 	return (_putchar('%'));
-}
-
-/**
- * print_S - custom format specifier
- * @ap: argument pointer
- * @params: the parameters struct
- *
- * Return: number chars printed
- */
-int print_S(va_list ap, params_t *params)
-{
-	char *text = va_arg(ap, char *);
-	char *hexadecimal;
-	int count = 0;
-
-	if ((int)(!text))
-		return (_puts(NULL_STRING));
-
-	for (; *text; text++)
-	{
-		if ((*text > 0 && *text < 32) || *text >= 127)
-		{
-			count += _putchar('\\');
-			count += _putchar('x');
-			hexadecimal = convert(*text, 16, 0, params);
-
-			if (!hexadecimal[1])
-				count += _putchar('0');
-
-			count += _puts(hexadecimal);
-		}
-		else
-		{
-			count += _putchar(*text);
-		}
-	}
-
-	return (count);
 }
