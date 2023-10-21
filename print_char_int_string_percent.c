@@ -46,11 +46,11 @@ int print_int(va_list ap, params_t *params)
 }
 
 /**
- * print_string - prints string
- * @str: argument pointer
- * @params: the parameters struct
- *
- * Return: number chars printed
+ * pad_string - Handles padding and precision truncation
+ * for a string before printing.
+ * @str: The string to pad.
+ * @params: Struct containing settings like precision.
+ * Return: new padded/truncated string length
  */
 int pad_string(char *str, params_t *params)
 {
