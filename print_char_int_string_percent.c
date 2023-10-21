@@ -84,6 +84,7 @@ int print_string(va_list ap, params_t *params)
 	char *str = va_arg(ap, char *);
 	unsigned int count = 0, i;
 	unsigned int len;
+
 	if (!str)
 		str = NULL_STRING;
 
