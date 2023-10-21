@@ -67,7 +67,7 @@ int print_string(va_list ap, params_t *params)
 
 	if (params->precision < padding)
 		j = padding = params->precision;
-
+	
 	if (params->minus_flag)
 	{
 		if (params->precision != UINT_MAX)
