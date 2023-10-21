@@ -62,7 +62,7 @@ int pad_string(char *str, params_t *params)
 		len = params->precision;
 	}
 
-	return (int)len;
+	return ((int)len);
 }
 
 /**
