@@ -47,6 +47,32 @@ int print_int(va_list ap, params_t *params)
 
 /**
  * print_string - prints string
+ * @str: argument pointer
+ * @params: the parameters struct
+ *
+ * Return: number chars printed
+ */
+int pad_string(char *str, params_t *params)
+{
+
+	int len = _strlen(str);
+
+	if (params->precision < len)
+	{
+		str[params->precision] = '\0';
+		len = params->precision;
+	}
+
+	while (len < params->precision)
+	{
+		str[len++] = ' ';
+	}
+
+	return len;
+}
+
+/**
+ * print_string - prints string
  * @ap: argument pointer
  * @params: the parameters struct
  *
@@ -54,39 +80,34 @@ int print_int(va_list ap, params_t *params)
  */
 int print_string(va_list ap, params_t *params)
 {
-	char *text = va_arg(ap, char *), padding_char = ' ';
-	unsigned int padding = 0, count = 0, i = 0, j;
 
-	(void)params;
+	char *str = va_arg(ap, char *);
+	unsigned int count = 0, i;
 
-	switch ((int)(!text))
-		case 1:
-			text = NULL_STRING;
+	if (!str)
+		str = "(null)";
 
-	j = padding = _strlen(text);
-
-	if (params->precision < padding)
-		j = padding = params->precision;
+	int len = pad_string(str, params);
 
 	if (params->minus_flag)
 	{
 		if (params->precision != UINT_MAX)
-			for (i = 0; i < padding; i++)
-				count += _putchar(*text++);
+			for (i = 0; i < len; i++)
+				count += _putchar(str[i]);
 		else
-			count += _puts(text);
+			count += _puts(str);
 	}
 
-	while (j++ < params->width)
-		count += _putchar(padding_char);
+	while (len++ < params->width)
+		count += _putchar(' ');
 
 	if (!params->minus_flag)
 	{
 		if (params->precision != UINT_MAX)
-			for (i = 0; i < padding; i++)
-				count += _putchar(*text++);
+			for (i = 0; i < len; i++)
+				count += _putchar(str[i]);
 		else
-			count += _puts(text);
+			count += _puts(str);
 	}
 
 	return (count);
